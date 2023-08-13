@@ -1,6 +1,44 @@
-
 let choices = ['rock', 'paper', 'scissors'];
-let result = 0;
+let round = 1;
+let compScore = 0;
+let playerScore = 0;
+let endFlag = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const DOMplayerScore = document.querySelector("#playerScore");
+    const DOMcompScore = document.querySelector("#compScore");
+    const gameRes = document.querySelector("#result")
+    const btns = document.querySelectorAll(".ctrls > button");
+    const currRound = document.querySelector("#round")
+
+    btns.forEach((button) => {
+        button.addEventListener('click', () => {
+
+            if (endFlag == 0){
+                let compChoice = getComputerChoice();
+                let result = playGame(compChoice, button.id);   
+
+                DOMcompScore.textContent = compScore;
+                DOMplayerScore.textContent = playerScore;
+                gameRes.innerHTML = result;
+                currRound.innerHTML = "Round: " + round;
+
+                round++;
+
+                if (compScore == 5 || playerScore == 5){
+                    if (playerScore == 5){
+                        gameRes.innerHTML =  "You Win";
+                    }
+                    else {
+                        gameRes.innerHTML =  "You Lose";
+                    }
+                    endFlag = 1;
+                }
+            }
+            
+        });
+    });
+});
 
 function getComputerChoice(){
     let randomNB = Math.floor(Math.random() * 3);
@@ -18,7 +56,7 @@ function playGame(compChoice, playerChoice){
             (compChoice == 'scissors' && playerChoice == 'paper')){
 
             returnMSG = returnMSG + "You Lose!! " + compChoice + " beats " + playerChoice;
-            result =- 1;
+            compScore++;
         }
         
         else if ((playerChoice == 'rock' && compChoice == 'scissors')||
@@ -26,31 +64,9 @@ function playGame(compChoice, playerChoice){
                  (playerChoice == 'scissors' && compChoice == 'paper')){
 
             returnMSG = returnMSG + "You WIN!! " + playerChoice + " beats " + compChoice;
-            result =+ 1;          
+            playerScore++;        
         }
     }
+    result = returnMSG;
     return returnMSG;
 }
-
-function game(){
-    for(let i = 0; i < 5; i++){
-        let compChoice = getComputerChoice();
-        let playerChoice = prompt("enter your choice").toLowerCase();
-        console.log(playGame(compChoice, playerChoice));
-    }
-
-    if (result >= 0){
-        result = 0;
-        return "You Win";
-    }
-    else {
-        result = 0;
-        return "You Lose";
-    }
-}
-
-console.log(game());
-
-
-
-
