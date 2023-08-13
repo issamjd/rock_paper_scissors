@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const DOMcompScore = document.querySelector("#compScore");
     const gameRes = document.querySelector("#result")
     const btns = document.querySelectorAll(".ctrls > button");
-    const currRound = document.querySelector("#round")
+    const currRound = document.querySelector("#round");
+    const restartBtn = document.querySelector("#restart");
 
     btns.forEach((button) => {
         button.addEventListener('click', () => {
@@ -33,7 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         gameRes.innerHTML =  "You Lose";
                     }
                     endFlag = 1;
+                    restartBtn.style.display = "block"; // Show the button
+                    
                 }
+                else {
+                    restartBtn.style.display = "none"; // Hide the button
+                }
+            }
+            if (button.id == "restart"){
+                endFlag = 0;
+                round = 1;
+                compScore = 0;
+                playerScore = 0;
+                DOMcompScore.textContent = compScore;
+                DOMplayerScore.textContent = playerScore;
+                gameRes.innerHTML = "";
+                currRound.innerHTML = "";
             }
             
         });

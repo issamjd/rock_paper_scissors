@@ -10,3 +10,6 @@
 .score > p:nth-child(4){
     display: block;
 }
+#restart{
+    display: none;
+}
