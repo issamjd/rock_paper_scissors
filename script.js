@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currRound.innerHTML = "Round: ";
             restartBtn.style.display = "none"; // Hide the button
             restartTxt.style.display = "none";
+            moves.innerHTML = '<img src="imgs/player.png" alt="player"> -<img src="imgs/robot.png" alt="cpu">'
         });
     });
 });
