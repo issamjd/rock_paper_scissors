@@ -5,12 +5,12 @@ let playerScore = 0;
 let endFlag = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const DOMplayerScore = document.querySelector("#playerScore");
-    const DOMcompScore = document.querySelector("#compScore");
+    const score = document.querySelector("#score");
     const gameRes = document.querySelector("#result")
     const btns = document.querySelectorAll(".ctrls > button");
     const currRound = document.querySelector("#round");
     const restartBtn = document.querySelector("#restart");
+    const restartTxt = document.querySelector("#restartTxt");
 
     btns.forEach((button) => {
         button.addEventListener('click', () => {
@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let compChoice = getComputerChoice();
                 let result = playGame(compChoice, button.id);   
 
-                DOMcompScore.textContent = compScore;
-                DOMplayerScore.textContent = playerScore;
+                score.textContent = playerScore + " - " + compScore;
                 gameRes.innerHTML = result;
                 currRound.innerHTML = "Round: " + round;
 
@@ -35,10 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     endFlag = 1;
                     restartBtn.style.display = "block"; // Show the button
-                    
+                    restartTxt.style.display = "block";
                 }
                 else {
                     restartBtn.style.display = "none"; // Hide the button
+                    restartTxt.style.display = "none";
                 }
             }
             if (button.id == "restart"){
@@ -46,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 round = 1;
                 compScore = 0;
                 playerScore = 0;
-                DOMcompScore.textContent = compScore;
-                DOMplayerScore.textContent = playerScore;
+                score.textContent = "0 - 0";
                 gameRes.innerHTML = "";
                 currRound.innerHTML = "";
             }
