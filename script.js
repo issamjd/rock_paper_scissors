@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currRound = document.querySelector("#round");
     const restartBtn = document.querySelector("#restart");
     const restartTxt = document.querySelector("#restartTxt");
+    const moves = document.querySelector("#moves");
 
     btns.forEach((button) => {
         button.addEventListener('click', () => {
@@ -27,10 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (compScore == 5 || playerScore == 5){
                     if (playerScore == 5){
-                        gameRes.innerHTML =  "You Win";
+                        gameRes.innerHTML =  "CONGRATS!! You WON!";
                     }
                     else {
-                        gameRes.innerHTML =  "You Lose";
+                        gameRes.innerHTML =  "You LOST";
                     }
                     endFlag = 1;
                     restartBtn.style.display = "block"; // Show the button
@@ -40,17 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     restartBtn.style.display = "none"; // Hide the button
                     restartTxt.style.display = "none";
                 }
-            }
-            if (button.id == "restart"){
-                endFlag = 0;
-                round = 1;
-                compScore = 0;
-                playerScore = 0;
-                score.textContent = "0 - 0";
-                gameRes.innerHTML = "";
-                currRound.innerHTML = "";
-            }
-            
+            }          
+        });
+        restartBtn.addEventListener('click', () => {
+            endFlag = 0;
+            round = 1;
+            compScore = 0;
+            playerScore = 0;
+            score.textContent = "0 - 0";
+            gameRes.innerHTML = "May the Best Man (or Bot) WIN!!";
+            currRound.innerHTML = "Round: ";
+            restartBtn.style.display = "none"; // Hide the button
+            restartTxt.style.display = "none";
         });
     });
 });
@@ -83,5 +85,6 @@ function playGame(compChoice, playerChoice){
         }
     }
     result = returnMSG;
+    moves.innerHTML = '<img src="imgs/player.png" alt="player"> <img src="imgs/'+playerChoice+'.png" alt="player move"> <img src="imgs/'+compChoice+'.png" alt="cpu move"> <img src="imgs/robot.png" alt="cpu">'
     return returnMSG;
 }
